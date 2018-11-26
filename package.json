@@ -1,0 +1,15 @@
+{
+  "name": "avengers-chat",
+  "version": "0.1.0",
+  "main": "worker/index.ts",
+  "private": true,
+  "scripts": {
+    "deploy": "zeta push",
+    "start": "zeta run"
+  },
+  "dependencies": {
+    "@zetapush/cli": "*",
+    "@zetapush/core": "*",
+    "@zetapush/platform-legacy": "*"
+  }
+}
