@@ -1,26 +1,24 @@
-# Create basic web application with ZetaPush
+# Create application with ZetaPush
 ===============================================================================
 
 Hello !
 
-I will show you how to quickly create a basic application that allows you to
-use a Avengers character and chat with others.
+I will show you how to quickly create a application that allows you to use a Avengers character and chat with others.
 
-ZetaPush is a back-end framework based on node.js that allows you to create a
-serverless application using high level and remotely hosted services.
+ZetaPush is a back-end framework based on node.js that allows you to create a serverless application using high level and remotely hosted services.
 
 On this application, we will use 3 services :
 
-    - stack (store messages in database)
-    - messaging (send message on channel in realtime by websocket)
-    - groups (create groups to group users)
+ - [stack](https://zetapush.github.io/documentation/#_stack) &rarr; store messages in database
+ - [messaging](https://zetapush.github.io/documentation/#_messaging) &rarr; send message on channel in realtime by websocket
+ - [groups](https://zetapush.github.io/documentation/#_groups) &rarr; create groups to group users
 
 We will cover these steps:
 
-    1) Installing ZetaPush and creating a new application
-    2) Developing worker API
-    3) Writing UI and worker interaction
-    4) Building your app to be deployed to production
+1. Installing ZetaPush and creating a new application.
+2. Developing worker API.
+3. Writing UI and worker interaction.
+4. Building your app to be deployed to production.
 
 ## Installing ZetaPush and creating a new application
 -------------------------------------------------------------------------------
@@ -36,7 +34,7 @@ If you haven't done it already, learn how to install Node.js and npm
 
 To create project from command line
 ```console
-$ npm init @zetapush avengers-chat
+npm init @zetapush avengers-chat
 ```
 
 ((You will be prompted for a developer login and a developer password : you
@@ -54,14 +52,12 @@ npm run start -- --serve-front
 
 Remember what the application should do :
 
-    - Ask to user the Avengers character he want
-    - Redirect to a chat with other users where he can retrive old messages
-      and send new messages
+- Ask to user the Avengers character he want.
+- Redirect to a chat with other users where he can retrive old messages and send new messages.
 
 Technically, that's what our backend has to do :
 
-    - Create a group (if it does not already exist) that users can join, which
-      represents the chat conversation
+- Create a group (if it does not already exist) that users can join, which represents the chat conversation.
 
 ```js
 async createConversation() {
@@ -77,7 +73,7 @@ async createConversation() {
 }
 ```
 
-    - Add the current user in the conversation
+- Add the current user in the conversation.
 
 ```js
 async addMeToConversation() {
@@ -90,7 +86,7 @@ async addMeToConversation() {
 }
 ```
 
-    - Send a message on the chat and store it in database with stack service
+- Send a message on the chat and store it in database with stack service.
 
 ```js
 async sendMessage(message = {}) {
@@ -115,7 +111,7 @@ async sendMessage(message = {}) {
 }
 ```
 
-    - Get all messages in the conversation from stack service
+- Get all messages in the conversation from stack service.
 
 ```js
 async getMessages() {
@@ -127,7 +123,7 @@ async getMessages() {
 }
 ```
 
-    - ... And that's all !
+- ... And that's all !
 
 We put these 4 methods in a class in `worker/index.ts` :
 
@@ -146,24 +142,25 @@ export default class AvengersApi {
         private messaging: Messaging,
         private groups: Groups
     ) {}
+    
+    /* insert the 4 methods here */
+
+}
 ```
 
 In this worker class :
 
-    - requestContext is ((insert explanation from doc))
-    - CONVERSATION_ID and CHANNEL_MESSAGING are constants but we can easily
-      turn them into variables to extend our avengers-chat.
+- requestContext is ((insert explanation from doc))
+- CONVERSATION_ID and CHANNEL_MESSAGING are constants, but we can easily turn them into variables to extend our avengers-chat.
 
 ## Writing UI and worker interaction
 -------------------------------------------------------------------------------
 
-You are free to implement your own UI so we won't explain how to code a message
-form or a messages container with HTML/CSS (you can stole our UI to quickly
-finish this tutorial).
+You are free to implement your own UI so we won't explain how to code a message form or a messages container with HTML/CSS (you can stole our UI to quickly finish this tutorial).
 
 The required parts of you front are the following :
 
-    - Include ZetaPush dependencies
+- Include ZetaPush dependencies.
 
 ```html
 <!-- ZetaPush dependencies -->
@@ -171,15 +168,14 @@ The required parts of you front are the following :
 <script src="https://unpkg.com/@zetapush/platform-legacy"></script>
 ```
 
-    - In `index.js`, create the ZetaPush client (credentials are inject) and a
-      ProxyService to bridge with ZetaPush plateform
+- In `index.js`, create the ZetaPush client (credentials are inject) and a ProxyService to bridge with ZetaPush plateform.
 
 ```js
 const client = new ZetaPushClient.WeakClient();
 const api = client.createProxyTaskService();
 ```
 
-    - Create service to listen incoming messages on the channel from the worker
+- Create service to listen incoming messages on the channel from the worker.
 
 ```js
 client.createService({
@@ -191,13 +187,9 @@ client.createService({
 });
 ```
 
-    The callback will receive the data send by each call to `sendMessage` on
-    the worker side. It must push the message into the html container.
+The callback will receive the data send by each call to `sendMessage` on the worker side. It must push the message into the html container.
 
-    - In an asynchronous function, start a connection with ZetaPush plateform
-      and call the worker methods to : create conversation (if you're the first
-      to join the chat), add the client to this conversation, and finally get
-      the list of messages previously sended.
+- In an asynchronous function, start a connection with ZetaPush plateform and call the worker methods to : create conversation (if you're the first to join the chat), add the client to this conversation, and finally get the list of messages previously sended.
 
 ```js
 async onConnectionEstablished() {
@@ -210,7 +202,7 @@ async onConnectionEstablished() {
 }
 ```
 
-    - And obviously, send message when user submit the message form
+- And obviously, send message when user submit the message form
 
 ```js
 this.api.sendMessage(message);
@@ -226,3 +218,5 @@ npm run deploy
 ```
 
 This command will expose the URL of the deployed front.
+
+Thanks for reading !
