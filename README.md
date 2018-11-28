@@ -2,6 +2,10 @@
 
 A basic application that allows you to use a _Avengers_ character and chat with others.
 
+## Tutorial
+
+You're new with ZetaPush ? Read this [tutorial](./TUTORIAL.md) !
+
 ## Installation
 
 ```console
