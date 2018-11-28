@@ -182,7 +182,8 @@ client.createService({
     Type: ZetaPushPlatformLegacy.Messaging,
     listener: {
         /* 'channelName': yourCallbackForEachMessageReceived */
-        avengersChannel: ({ data }) => controller.onAvengersMessage(data),
+        avengersChannel: ({ data }) => controller.onAvengersMessage(data)
+        /* In your code, callback is include in a 'controller' class */
     },
 });
 ```
