@@ -23,21 +23,20 @@ We will cover these steps:
 ## Installing ZetaPush and creating a new application
 -------------------------------------------------------------------------------
 
-First, you must create an account on ZetaPush platform, for this,
-[CONTACT US](https://www.zetapush.com/sign-up-for-a-free-trial).
-
-((Now, you have received a login, a password, and a sandboxId.))
-
 As any web project based on node.js, you need to install npm and node.
 If you haven't done it already, learn how to install Node.js and npm [here](https://www.npmjs.com/get-npm).
+
+Now, you must create an account on ZetaPush platform, for this,
+[CONTACT US](https://www.zetapush.com/sign-up-for-a-free-trial).
+
+After that, you will receive a login, a password, and a sandboxId (an unique ID representing your worker on our platform).
 
 To create project from command line
 ```console
 npm init @zetapush avengers-chat
 ```
 
-((You will be prompted for a developer login and a developer password : you
-received them after contacting us on our website.))
+ZetaPush CLI asks for a developer login and a developer password : you received them after contacting us on our website.
 
 Let's make sure everything is working properly with the generated project :
 
