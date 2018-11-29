@@ -29,8 +29,7 @@ First, you must create an account on ZetaPush platform, for this,
 ((Now, you have received a login, a password, and a sandboxId.))
 
 As any web project based on node.js, you need to install npm and node.
-If you haven't done it already, learn how to install Node.js and npm
-[here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+If you haven't done it already, learn how to install Node.js and npm [here](https://www.npmjs.com/get-npm).
 
 To create project from command line
 ```console
