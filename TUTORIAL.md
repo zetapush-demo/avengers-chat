@@ -5,7 +5,7 @@ Hello !
 
 I will show you how to quickly create a application that allows you to use a Avengers character and chat with others.
 
-ZetaPush is a back-end framework based on node.js that allows you to create a serverless application using high level and remotely hosted services.
+ZetaPush is a back-end framework that allows you to create a serverless application using high level and remotely hosted services.
 
 On this application, we will use 3 services :
 
@@ -154,7 +154,7 @@ In this worker class :
 ## Writing UI and worker interaction
 -------------------------------------------------------------------------------
 
-You are free to implement your own UI so we won't explain how to code a message form or a messages container with HTML/CSS (you can stole our UI to quickly finish this tutorial).
+You are free to implement your own UI so we won't explain how to code a message form or a messages container with HTML/CSS (you can steal our UI to quickly finish this tutorial).
 
 The required parts of you front are the following :
 
