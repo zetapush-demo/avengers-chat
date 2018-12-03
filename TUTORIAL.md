@@ -166,12 +166,15 @@ The required parts of you front are the following :
 <script src="https://unpkg.com/@zetapush/platform-legacy"></script>
 ```
 
-- In `index.js`, create the ZetaPush client (credentials are inject) and a ProxyService to bridge with ZetaPush plateform.
+- In `index.js`, create the ZetaPush client (credentials are inject) and a ProxyTaskService to bridge with ZetaPush plateform.
 
 ```js
 const client = new ZetaPushClient.WeakClient();
 const api = client.createProxyTaskService();
 ```
+Now, with `api`, you can call worker-side methods (respecting its name).
+
+For exemple : if you have a worker-side `foo()` method, just call `api.foo()` on the front side. Same way if you have a worker-side `bar(id, name)` method that take parameters, just call `api.bar(42, 'Person')`, and parameters are transmit.
 
 - Create service to listen incoming messages on the channel from the worker.
 
