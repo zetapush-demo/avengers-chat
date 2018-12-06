@@ -218,7 +218,9 @@ Run your worker locally, and run local http server to serve your front code.
 
 ZetaPush CLI will ask you for a developer login and a developer password : you received them after contacting us on our website.
 
-`npm run start -- --serve-front`{{execute}}
+```console
+npm run start -- --serve-front
+```
 
 ## Deploy to production
 -------------------------------------------------------------------------------
@@ -228,6 +230,8 @@ First, stop the local worker with a (CTRL+C).
 
 At the end of the deployment, ZetaPush CLI exposes front URL : share it with your friends !
 
-`npm run deploy`{{execute}}
+```console
+npm run deploy
+```
 
 That's it, you've deployed your first application on ZetaPush.
