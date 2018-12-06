@@ -140,7 +140,7 @@ export default class AvengersApi {
         private messaging: Messaging,
         private groups: Groups
     ) {}
-    
+
     /* insert the 4 methods here */
 
 }
