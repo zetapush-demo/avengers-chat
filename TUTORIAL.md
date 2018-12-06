@@ -3,7 +3,7 @@
 
 Hello !
 
-I will show you how to quickly create a application that allows you to use a Avengers character and chat with others.
+I will show you how to quickly create an application that allows you to use an Avengers character and chat with others.
 
 ZetaPush is a back-end framework that allows you to create a serverless application using high level and remotely hosted services.
 
@@ -16,9 +16,10 @@ On this application, we will use 3 services :
 We will cover these steps:
 
 1. Installing ZetaPush and creating a new application.
-2. Developing worker API.
+2. Developing worker API (worker is used as interaction between the ZetaPush platform and your front).
 3. Writing UI and worker interaction.
-4. Building your app to be deployed to production.
+4. Run locally.
+5. Deploy to production.
 
 ## Installing ZetaPush and creating a new application
 -------------------------------------------------------------------------------
@@ -29,7 +30,7 @@ If you haven't done it already, learn how to install Node.js and npm [here](http
 Now, you must create an account on ZetaPush platform, for this,
 [CONTACT US](https://www.zetapush.com/sign-up-for-a-free-trial).
 
-After that, you will receive a login, a password, and a sandboxId (an unique ID representing your worker on our platform).
+After that, you will receive a login, a password.
 
 To create project from command line
 ```console
@@ -50,10 +51,10 @@ npm run start -- --serve-front
 
 Remember what the application should do :
 
-- Ask to user the Avengers character he want.
-- Redirect to a chat with other users where he can retrive old messages and send new messages.
+- Ask to user which Avengers character he wants.
+- Redirect to a chat with other users where he can view messages history and send new messages.
 
-Technically, that's what our backend has to do :
+Technically, that's what our worker has to do :
 
 - Create a group (if it does not already exist) that users can join, which represents the chat conversation.
 
@@ -166,7 +167,7 @@ The required parts of you front are the following :
 <script src="https://unpkg.com/@zetapush/platform-legacy"></script>
 ```
 
-- In `index.js`, create the ZetaPush client (credentials are inject) and a ProxyTaskService to bridge with ZetaPush plateform.
+- In `index.js`, create the ZetaPush client (credentials are injected) and a ProxyTaskService to bridge with ZetaPush platform.
 
 ```js
 const client = new ZetaPushClient.WeakClient();
@@ -174,7 +175,7 @@ const api = client.createProxyTaskService();
 ```
 Now, with `api`, you can call worker-side methods (respecting its name).
 
-For exemple : if you have a worker-side `foo()` method, just call `api.foo()` on the front side. Same way if you have a worker-side `bar(id, name)` method that take parameters, just call `api.bar(42, 'Person')`, and parameters are transmit.
+For exemple : if you have a worker-side `foo()` method, just call `api.foo()` on the front side. Same way if you have a worker-side `bar(id, name)` method that take parameters, just call `api.bar(42, 'Person')`, and parameters are transmitted.
 
 - Create service to listen incoming messages on the channel from the worker.
 
@@ -189,9 +190,9 @@ client.createService({
 });
 ```
 
-The callback will receive the data send by each call to `sendMessage` on the worker side. It must push the message into the html container.
+The callback will receive the data send by each call to `sendMessage` on the worker side, and adds a new line in the html for each received message.
 
-- In an asynchronous function, start a connection with ZetaPush plateform and call the worker methods to : create conversation (if you're the first to join the chat), add the client to this conversation, and finally get the list of messages previously sended.
+- In an asynchronous function, start a connection with ZetaPush platform and call the worker methods to : create conversation (if you're the first to join the chat), add the client to this conversation, and finally get the list of messages previously sended.
 
 ```js
 async onConnectionEstablished() {
@@ -210,15 +211,23 @@ async onConnectionEstablished() {
 this.api.sendMessage(message);
 ```
 
-## Building your app to be deployed to production
+## Run locally
 -------------------------------------------------------------------------------
 
-With ZetaPush CLI, deploy application on ZetaPush platform is easy and fast :
+Run your worker locally, and run local http server to serve your front code.
 
-```console
-npm run deploy
-```
+ZetaPush CLI will ask you for a developer login and a developer password : you received them after contacting us on our website.
 
-This command will expose the URL of the deployed front.
+`npm run start -- --serve-front`{{execute}}
 
-Thanks for reading !
+## Deploy to production
+-------------------------------------------------------------------------------
+
+This command will send your worker and front code to ZetaPush cloud servers.
+First, stop the local worker with a (CTRL+C).
+
+At the end of the deployment, ZetaPush CLI exposes front URL : share it with your friends !
+
+`npm run deploy`{{execute}}
+
+That's it, you've deployed your first application on ZetaPush.
