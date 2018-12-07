@@ -4,9 +4,9 @@ import dom from './utils/dom.js';
 // Create the ZetaPush Client
 const client = new ZetaPushClient.WeakClient();
 /**
- * Create service to listen incoming messages
+ * Create service to listen incoming messages on the channel from the worker.
  */
-const service = client.createService({
+client.createService({
   Type: ZetaPushPlatformLegacy.Messaging,
   listener: {
     avengersChannel: ({ data }) => controller.onAvengersMessage(data),

@@ -6,39 +6,50 @@ const CHANNEL_MESSAGING = 'avengersChannel';
 
 @Injectable()
 export default class AvengersApi {
+
   private requestContext!: Context;
+
   constructor(
     private stack: Stack,
     private messaging: Messaging,
     private groups: Groups
   ) {}
+
   /**
-   * Create the conversation of the chat, if doesn't already exists
+   * Create a group (if it does not already exist) that users can join,
+   * which represents the chat conversation.
    */
+
   async createConversation() {
     const { exists } = await this.groups.exists({
       group: CONVERSATION_ID
     });
+
     if (!exists) {
       await this.groups.createGroup({
         group: CONVERSATION_ID
       });
     }
   }
+
   /**
    * Add the current user in the conversation
    */
+
   async addMeToConversation() {
     const output = await this.groups.addUser({
       group: CONVERSATION_ID,
       user: this.requestContext.owner
     });
+
     return output;
   }
+
   /**
-   * Send a message on the chat
+   * Send a message on the chat and store it in database with stack service.
    * @param {Object} message
    */
+
   async sendMessage(message = {}) {
     // Get all users inside the conversation
     const group = await this.groups.groupUsers({
@@ -61,13 +72,16 @@ export default class AvengersApi {
 
     return group;
   }
+
   /**
-   * Get all messages in the conversation
+   * Get all messages in the conversation from stack service.
    */
+
   async getMessages() {
     const { result } = await this.stack.list({
       stack: CONVERSATION_ID
     });
+
     return result;
   }
 }
