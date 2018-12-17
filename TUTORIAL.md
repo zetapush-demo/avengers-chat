@@ -9,9 +9,9 @@ ZetaPush is a back-end framework that allows you to create a serverless applicat
 
 On this application, we will use 3 services :
 
- - [stack](https://zetapush.github.io/documentation/#_stack) &rarr; store messages in database
- - [messaging](https://zetapush.github.io/documentation/#_messaging) &rarr; send message on channel in realtime by websocket
- - [groups](https://zetapush.github.io/documentation/#_groups) &rarr; create groups to group users
+ - [stack](https://doc.zetapush.com/#_stack) &rarr; store messages in database
+ - [messaging](https://doc.zetapush.com/#_messaging) &rarr; send message on channel in realtime by websocket
+ - [groups](https://doc.zetapush.com/#_groups) &rarr; create groups to group users
 
 We will cover these steps:
 
@@ -30,7 +30,7 @@ If you haven't done it already, learn how to install Node.js and npm [here](http
 Now, you must create an account on ZetaPush platform, for this,
 [CONTACT US](https://www.zetapush.com/sign-up-for-a-free-trial).
 
-After that, you will receive a login, a password.
+After that, you will receive a login and a password.
 
 To create project from command line
 ```console
