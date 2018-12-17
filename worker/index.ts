@@ -1,4 +1,4 @@
-import { Injectable, Context } from '@zetapush/core';
+import { Injectable, RequestContext } from '@zetapush/core';
 import { Stack, Messaging, Groups } from '@zetapush/platform-legacy';
 
 const CONVERSATION_ID = 'avengersChat';
@@ -7,7 +7,7 @@ const CHANNEL_MESSAGING = 'avengersChannel';
 @Injectable()
 export default class AvengersApi {
 
-  private requestContext!: Context;
+  private requestContext!: RequestContext;
 
   constructor(
     private stack: Stack,
