@@ -4,7 +4,7 @@ A basic application that allows you to use a _Avengers_ character and chat with 
 
 ## Tutorial
 
-You're new with ZetaPush ? Read this [tutorial](./TUTORIAL.md) !
+You're new with ZetaPush ? Read this [tutorial](./TUTORIAL.md) or try it on [Katacoda](https://katacoda.com/zetapush/scenarios/avengers-chat)!
 
 ## Installation
 
